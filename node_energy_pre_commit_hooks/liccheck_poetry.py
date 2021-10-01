@@ -11,11 +11,11 @@ from node_energy_pre_commit_hooks.utils import (
 def run_liccheck_against_pipfile_lock(
     filenames: Sequence[str], strategy_file: str
 ) -> int:
-    if "Pipfile.lock" not in set(filenames):
+    if "poetry.lock" not in set(filenames):
         return 0
 
     with temporary_path() as requirements_path:
-        requirements_path.write_text(cmd_output("pipenv", "lock", "--requirements"))
+        requirements_path.write_text(cmd_output("poetry", "export","--without-hashes", ">", "requirements.txt"))
         args = ("liccheck", "-s", strategy_file, "-r", requirements_path)
         try:
             cmd_output(*args)
