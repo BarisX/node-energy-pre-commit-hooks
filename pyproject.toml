@@ -19,7 +19,7 @@ poetry = "^1.1.11"
 liccheck = "^0.6.2"
 
 [tool.poetry.scripts]
-liccheck-pipenv = "node_energy_pre_commit_hooks.liccheck_poetry:main"
+liccheck-poetry = "node_energy_pre_commit_hooks.liccheck_poetry:main"
 import-linter = "node_energy_pre_commit_hooks.import_linter:main"
 
 
