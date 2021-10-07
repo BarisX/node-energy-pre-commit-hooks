@@ -8,14 +8,14 @@ from node_energy_pre_commit_hooks.utils import (
 )
 
 
-def run_liccheck_against_pipfile_lock(
+def run_liccheck_against_poetry_lock(
     filenames: Sequence[str], strategy_file: str
 ) -> int:
     if "poetry.lock" not in set(filenames):
         return 0
 
     with temporary_path() as requirements_path:
-        requirements_path.write_text(cmd_output("poetry", "export","--without-hashes", ">", "requirements.txt"))
+        requirements_path.write_text(cmd_output("poetry", "run","pip", "freeze"))
         args = ("liccheck", "-s", strategy_file, "-r", requirements_path)
         try:
             cmd_output(*args)
@@ -36,7 +36,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     )
 
     args = parser.parse_args(argv)
-    return run_liccheck_against_pipfile_lock(args.filenames, args.strategy)
+    return run_liccheck_against_poetry_lock(args.filenames, args.strategy)
 
 
 if __name__ == "__main__":

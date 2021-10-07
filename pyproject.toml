@@ -15,8 +15,8 @@ flake8 = "^3.7.9"
 isort = "^4.3.21"
 pre-commit = "^2.1.0"
 mypy = "^0.761"
-liccheck = "*"
-poetry = "*"
+poetry = "^1.1.11"
+liccheck = "^0.6.2"
 
 [tool.poetry.scripts]
 liccheck-pipenv = "node_energy_pre_commit_hooks.liccheck_poetry:main"
